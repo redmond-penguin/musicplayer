@@ -16,7 +16,7 @@ Just some experiments with Python, but it might be of use to someone.
     
     positional arguments:
       path         A file or a path to recursively scan for music files. If 
-                   no path is provided, the currect directory is used.
+                   no path is provided, the current directory is used.
 
     optional arguments:
       -h, --help   show this help message and exit
