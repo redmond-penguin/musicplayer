@@ -27,24 +27,24 @@ def paint_screen(stdscr, song_number):
     for line in range(middle_line - 2, -1, -1):
         stdscr.hline(line, 0, ' ', x)
         if previous_song >= 0:
-            stdscr.addnstr(line, 6, list.get_file(previous_song).get_path(), x - 6)
+            stdscr.addnstr(line, 6, list.get_file(previous_song).get_description(), x - 6)
             stdscr.addstr(line, 0, str(list.get_file(previous_song).get_play_count()))
             previous_song = previous_song - 1
     stdscr.hline(middle_line - 1, 0, '-', x)
     stdscr.hline(middle_line, 0, ' ', x)
-    stdscr.addnstr(middle_line, 6, f.get_path(), x - 6)
+    stdscr.addnstr(middle_line, 6, f.get_description(), x - 6)
     stdscr.hline(middle_line + 1, 0, '-', x)
     next_song = song_number + 1
     for line in range(middle_line + 2, y - 1):
         stdscr.hline(line, 0, ' ', x)
         if next_song < list_size:
-            stdscr.addnstr(line, 6, list.get_file(next_song).get_path(), x - 6)
+            stdscr.addnstr(line, 6, list.get_file(next_song).get_description(), x - 6)
             stdscr.addstr(line, 0, str(list.get_file(next_song).get_play_count()))
             next_song = next_song + 1
     stdscr.refresh()
     return middle_line
 
-storage = shelve.open(os.path.expanduser("~/.musicplayer"))
+storage = shelve.open(os.path.expanduser("~/.musicplayer_play_counts"))
 list = FileList(None, PersistentAudioFileFactory(storage))
 
 parser = argparse.ArgumentParser(description="Play music files")
@@ -78,11 +78,11 @@ while True:
         f = list.get_file(song_number)
         p = None
         pause = False
-        middle_line = paint_screen(stdscr, song_number)
         try:
             p = f.play_song()
             start_time = datetime.datetime.today()
             previous_seconds_duration = 0
+            middle_line = paint_screen(stdscr, song_number)
             stdscr.addstr(middle_line, 0, "00:00")
             stdscr.refresh()
             while p.poll() == None:

@@ -1,5 +1,12 @@
 from filesystem.basefile import BaseFile
 
+tiny_tag = True
+try:
+    from tinytag import TinyTag
+except ModuleNotFoundError:
+    tiny_tag = False
+    pass
+
 class AudioFile(BaseFile):
     def __init__(self, path):
         self.play_count = 0
@@ -26,5 +33,17 @@ class AudioFile(BaseFile):
             self.notify()
 
     def play_song(self):
+        p = self.play_async()
         self.set_play_count(self.play_count + 1)
-        return self.play_async()
+        return p
+
+    def get_description(self):
+        if tiny_tag:
+            try:
+                tag = TinyTag.get(self.get_path())
+                description = tag.title + " - " + tag.artist + " (" + tag.album + ")"
+            except:
+                description = self.get_path()
+        else:
+            description = self.get_path()
+        return description

@@ -14,11 +14,13 @@ class PersistentAudioFileFactory(AudioFileFactory):
         self.storage = storage
     
     def create_file(self, path):
+        f = super().create_file(path)
         try:
-            f = self.storage[path]
+            play_count = self.storage[path]
         except KeyError:
-            f = super().create_file(path)
-            self.storage[str(path)] = f
+            self.storage[str(path)] = 0
+            play_count = 0
+        f.set_play_count(play_count)
         f.attach(self)
         return f
 
@@ -26,5 +28,5 @@ class PersistentAudioFileFactory(AudioFileFactory):
         if not isinstance(subject, AudioFile):
             raise ValueError()
         path = subject.get_path()
-        self.storage[str(path)] = subject
+        self.storage[str(path)] = subject.get_play_count()
 
