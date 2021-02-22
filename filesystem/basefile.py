@@ -75,11 +75,3 @@ class BaseFile:
             if modifier != observer:
                 observer.update(self)
 
-    def __getstate__(self):
-        new_dict = self.__dict__.copy()
-        del new_dict['_observers']
-        return new_dict
-        
-    def __setstate__(self, state):
-        self.__dict__.update(state)
-        self._observers = []
