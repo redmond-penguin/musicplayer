@@ -11,7 +11,7 @@ import shelve
 scriptpath = os.path.abspath(os.path.dirname(__file__))
 includepath = os.path.dirname(scriptpath)
 sys.path.insert(0, includepath)
-from filesystem.filelist import FileList
+from audio.audiofilelist import AudioFileList
 from audio.persistentaudiofilefactory import PersistentAudioFileFactory
 from audio.audiofile import AudioFile
 
@@ -45,7 +45,7 @@ def paint_screen(stdscr, song_number):
     return middle_line
 
 storage = shelve.open(os.path.expanduser("~/.musicplayer_play_counts"))
-list = FileList(None, PersistentAudioFileFactory(storage))
+list = AudioFileList(None, PersistentAudioFileFactory(storage))
 
 parser = argparse.ArgumentParser(description="Play music files")
 parser.add_argument("--noshuffle", dest="shuffle", default=True, action='store_false',
@@ -71,7 +71,6 @@ line=-1
 while True:
     if args.shuffle:
         list.shuffle()
-        list.sort(AudioFile.get_play_count)
     song_number=0
     list_size=list.size()
     while song_number < list_size:

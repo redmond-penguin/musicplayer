@@ -31,5 +31,6 @@ Just some experiments with Python, but it might be of use to someone.
 During playing, the following keys can be used:
 * N - Next song
 * P - Previous song
+* R - Replay current song from the start
 * Space - Pause playing
 * X - Exit program
