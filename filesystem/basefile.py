@@ -24,6 +24,10 @@ class BaseFile:
         """
         return self.filepath
 	
+    def get_extension(self):
+        (path_name, path_extension) = os.path.splitext(self.filepath)
+        return path_extension.lower()[1:]
+
     def perform_operation(self, operation_path, args_before=None, args_after=None):
         """Execute a system command with at least filepath as a parameter.
 

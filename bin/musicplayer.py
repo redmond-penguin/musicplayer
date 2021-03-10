@@ -31,9 +31,17 @@ def paint_screen(stdscr, song_number):
             stdscr.addstr(line, 0, str(list.get_file(previous_song).get_play_count()))
             previous_song = previous_song - 1
     stdscr.hline(middle_line - 1, 0, '-', x)
+    extension = "File type: " + f.get_extension()
+    extension_length = len(extension)
+    if extension_length < x:
+        stdscr.addstr(middle_line - 1, x - extension_length, extension)
     stdscr.hline(middle_line, 0, ' ', x)
     stdscr.addnstr(middle_line, 6, f.get_description(), x - 6)
     stdscr.hline(middle_line + 1, 0, '-', x)
+    bitrate = "Bitrate: " + str(int(f.get_bitrate()))
+    bitrate_length = len(bitrate)
+    if bitrate_length < x:
+        stdscr.addstr(middle_line + 1, x - bitrate_length, bitrate)
     next_song = song_number + 1
     for line in range(middle_line + 2, y - 1):
         stdscr.hline(line, 0, ' ', x)
@@ -126,7 +134,7 @@ while True:
                     song_number = list_size
                     p.terminate()
                     break
-                time.sleep(0.5)
+                time.sleep(0.25)
             song_number = song_number + 1
         except KeyboardInterrupt:
             #if p != None:
