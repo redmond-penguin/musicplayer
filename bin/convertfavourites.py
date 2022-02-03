@@ -38,6 +38,6 @@ for favourite in content:
   list.add_path_to_list(os.path.join(source_path, favourite))
   for f in list:
     source_file_path = f.get_path()
-    destination_file_path = os.path.join(target_dir, os.path.splitext(os.path.basename(source_file_path))[0] + ".wav")
+    destination_file_path = os.path.join(target_dir, os.path.splitext(os.path.basename(source_file_path))[0] + ".mp3")
     destination_file = factory.create_file(destination_file_path)
     AudioConversionService().convert_audio_file(f, destination_file)

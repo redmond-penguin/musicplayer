@@ -7,6 +7,12 @@ try:
 except ModuleNotFoundError:
     tiny_tag = False
     pass
+music_tag = True
+try:
+    import music_tag
+except ModuleNotFoundError:
+    music_tag = False
+    pass
 
 class AudioFile(BaseFile):
     def __init__(self, path):
@@ -71,6 +77,26 @@ class AudioFile(BaseFile):
         else:
             description = self.get_path()
         return description
+
+    def set_tag(self, tag):
+      if tag is not None:
+        if music_tag:
+          print("tagging file...")
+          f = music_tag.load_file(self.get_path())
+          if tag.title is not None:
+            f['tracktitle'] = tag.title
+          if tag.track is not None:
+            f['tracknumber'] = tag.track
+          if tag.artist is not None:
+            f['artist'] = tag.artist
+          if tag.album is not None:
+            f['album'] = tag.album
+          if tag.albumartist is not None:
+            f['album_artist'] = tag.albumartist
+          f.save()
+          print("Finished tagging file")
+      return 1
+
 
     def get_bitrate(self):
         tag = self.get_tag()

@@ -20,7 +20,7 @@ list = FileList(None, factory)
 list.add_path_to_list(source_path)
 for f in list:
   source_file_path = f.get_path()
-  destination_file_path = os.path.join(destination_path, os.path.basename(source_file_path) + ".wav")
+  destination_file_path = os.path.join(destination_path, os.path.basename(source_file_path) + ".mp3")
   destination_file = factory.create_file(destination_file_path)
   AudioConversionService().convert_audio_file(f, destination_file)
 

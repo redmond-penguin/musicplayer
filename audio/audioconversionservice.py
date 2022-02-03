@@ -14,6 +14,8 @@ class AudioConversionService:
                 source_file.convert_to_wav(wav_file.get_path())
             if not type(target_file) == WavFile:
                 target_file.convert_from_wav(wav_file.get_path())
+            source_tag = source_file.get_tag()
+            target_file.set_tag(source_tag)
         except Exception as e:
             print("Conversion failed! " + str(e))
         finally:

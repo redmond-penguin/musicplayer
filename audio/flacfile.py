@@ -6,3 +6,6 @@ class FlacFile(OggFile):
 
     def convert_from_wav(self, input_file):
         self.perform_operation("flac", [input_file])
+
+    def play_async(self):
+        return self.perform_operation_async("mplayer", ["-really-quiet"])

@@ -11,4 +11,4 @@ class Mp3File(AudioFile):
         self.perform_operation("mpg123", None, ["-w", output_file])
 
     def convert_from_wav(self, input_file):
-        self.perform_operation("lame", [input_file])
+        self.perform_operation("lame", ["-q", "0", "-V", "0", input_file])
