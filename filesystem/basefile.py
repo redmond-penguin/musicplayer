@@ -28,7 +28,7 @@ class BaseFile:
         (path_name, path_extension) = os.path.splitext(self.filepath)
         return path_extension.lower()[1:]
 
-    def perform_operation(self, operation_path, args_before=None, args_after=None):
+    def perform_operation(self, operation_path, args_before=None, args_after=None, output_to_pipe=False, pipe_input=None):
         """Execute a system command with at least filepath as a parameter.
 
         Arguments:
@@ -41,7 +41,11 @@ class BaseFile:
         if args_after is None:
             args_after = []
         path = self.get_path()
-        return subprocess.call([operation_path] + args_before + [path] + args_after)
+        args = [operation_path] + args_before + [path] + args_after
+        if not output_to_pipe:
+          return subprocess.call(args, stdin=pipe_input)
+        else:
+          return subprocess.Popen(args, stdout=subprocess.PIPE).stdout
 
     def perform_operation_async(self, operation_path, args_before=None, args_after=None):
         """Execute a system command with at least filepath as a parameter.

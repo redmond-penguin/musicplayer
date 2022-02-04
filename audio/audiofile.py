@@ -26,10 +26,10 @@ class AudioFile(BaseFile):
     def play_async(self):
         return self.perform_operation_async("vlc", ["-q", "-I", "dummy", "--play-and-exit"])
 
-    def convert_to_wav(self, output_file):
+    def convert_to_wav(self, output_file, output_to_pipe=False):
         raise NotImplementedError()
 
-    def convert_from_wav(self, input_file):
+    def convert_from_wav(self, input_file, pipe_input=None):
         raise NotImplementedError()
 
     def get_play_count(self):
