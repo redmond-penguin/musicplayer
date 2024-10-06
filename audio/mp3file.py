@@ -5,7 +5,7 @@ class Mp3File(AudioFile):
         self.perform_operation("mpg123")
 
     def play_async(self):
-        return self.perform_operation_async("mpg123", ["-q", "--rva-mix"])
+        return self.perform_operation_async("mpg123", ["-q", "--rva-mix", "--no-control"])
 
     def convert_to_wav(self, output_file):
         self.perform_operation("mpg123", None, ["-w", output_file])

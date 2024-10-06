@@ -12,4 +12,4 @@ class FlacFile(OggFile):
         self.perform_operation("flac", [input_file])
 
     def play_async(self):
-        return self.perform_operation_async("mplayer", ["-really-quiet"])
+        return self.perform_operation_async("ogg123", ["-q"])
