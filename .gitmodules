@@ -1,0 +1,3 @@
+[submodule "tinytag"]
+	path = tinytag
+	url = git@github.com:tinytag/tinytag.git
