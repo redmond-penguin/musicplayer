@@ -8,7 +8,7 @@ Just some experiments with Python, but it might be of use to someone.
 * mpg123 for mp3 support (optional)
 * ogg123 for ogg and flac support (optional)
 * vlc for wma support (optional)
-* [tinytag](https://github.com/devsnd/tinytag) for displaying song title/artist/album instead of just file path (optional)
+* [tinytag](https://github.com/devsnd/tinytag) for displaying song title/artist/album instead of just file path (optional). Also included as a submodule, clone with "git clone --recurse-submodules" to get it.
 
 ## Usage
     usage: musicplayer.py [-h] [--noshuffle] [--repeat] [path [path ...]]
